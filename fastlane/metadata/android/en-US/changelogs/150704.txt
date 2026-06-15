@@ -1,0 +1,3 @@
+* Sync improvements and bug fixes
+* Fix flattening subtasks when moving between lists
+* Update translations
