@@ -9,6 +9,7 @@ import org.tasks.time.DateTimeUtils2.currentTimeMillis
 import org.tasks.time.ONE_DAY
 import org.tasks.time.endOfDay
 import org.tasks.time.noon
+import org.tasks.time.startOfDay
 
 /**
  * PermaSql allows for creating SQL statements that can be saved and used later without dates
@@ -42,6 +43,9 @@ object PermaSql {
     /** value to be replaced with the current time as long  */
     const val VALUE_NOW: String = "NOW()" // $NON-NLS-1$
 
+    /** value to be replaced by start of today as long  */
+    const val VALUE_SOD: String = "SOD()" // $NON-NLS-1$
+
     /** value to be replaced by noon yesterday as long  */
     private const val VALUE_NOON_YESTERDAY = "NOONY()" // $NON-NLS-1$
 
@@ -62,6 +66,9 @@ object PermaSql {
         var value = value
         if (value.contains(VALUE_NOW)) {
             value = value.replace(VALUE_NOW, currentTimeMillis().toString())
+        }
+        if (value.contains(VALUE_SOD)) {
+            value = value.replace(VALUE_SOD, currentTimeMillis().startOfDay().toString())
         }
         if (value.contains(VALUE_EOD)
             || value.contains(VALUE_EOD_DAY_AFTER)
@@ -88,6 +95,9 @@ object PermaSql {
         var value = value
         if (value.contains(VALUE_NOW)) {
             value = value.replace(VALUE_NOW, currentTimeMillis().toString())
+        }
+        if (value.contains(VALUE_SOD)) {
+            value = value.replace(VALUE_SOD, currentTimeMillis().startOfDay().toString())
         }
         if (value.contains(VALUE_EOD)
             || value.contains(VALUE_EOD_DAY_AFTER)
